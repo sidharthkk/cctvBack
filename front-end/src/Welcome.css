@@ -1,0 +1,48 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+body {
+    background-image: linear-gradient(rgba(22, 18, 18, 0.7), rgba(22, 18, 18, 0.7)), url('https://images.hdqwalls.com/download/interstellar-abstract-art-i4-1920x1080.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+ 
+  }
+
+
+.welcome-container {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto; 
+    max-width: 600px;
+}
+
+.welcome-heading {
+    margin-top: 170px;
+    background: linear-gradient(to right, #fceabb, #f8b500);
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    font-family: 'Roboto', sans-serif; 
+    font-size: 3.0rem; 
+   
+}
+
+.setup {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ff8a00; 
+    color: white;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+.setup:hover {
+    background-color: #e52e71; 
+}
