@@ -5,6 +5,9 @@ import math
 import pygame
 import pandas as pd
 
+# Frame skipping parameters
+skip_frames = 5  # Process every 5th frame
+frame_count = 0
 pygame.mixer.init()
 
 # Load YOLO models once (outside the loop for efficiency)
@@ -17,18 +20,24 @@ with open("road_classes.txt", "r") as my_file:
 classnames = ['fire', 'nofire', 'smoke']
 
 fire_alarm_flag = False
+accident_alarm_flag = False
 
-cap = cv2.VideoCapture('test-fire.mp4')
+cap = cv2.VideoCapture('test-accident-1.mp4')
 
 # Reduce resolution (optional, adjust as needed)
 width, height = 640, 480
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
+
 while True:
     ret, frame = cap.read()
     if not ret:
         break
+
+    frame_count += 1
+    if frame_count % skip_frames != 0:
+        continue  # Skip frames if not a multiple of skip_frames
 
     # Process frame here (fire and accident detection)
     fire_results = fire_model(frame, stream=True)
@@ -55,7 +64,10 @@ while True:
         if 'accident' in class_name:
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cvzone.putTextRect(frame, f'{class_name}', (x1, y1 - 10), scale=1, thickness=2, colorR=(255, 0, 0))
-
+            if not accident_alarm_flag:
+                    pygame.mixer.music.load('alarm.mp3')
+                    pygame.mixer.music.play()
+                    faccident_alarm_flag = True
     cv2.imshow("Fire and Accident Detection", frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break

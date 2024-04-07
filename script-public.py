@@ -6,9 +6,13 @@ from ultralytics import YOLO
 
 pygame.mixer.init()
 
+# Frame skipping parameters
+skip_frames = 6  # Number of frames to skip
+frame_count = 0
+
 # Load YOLO models once (outside the loop for efficiency)
-fire_model = YOLO('model-fire.pt')  # Assuming GPU acceleration if available
-weapon_model = YOLO('model-gun.pt')
+fire_model = YOLO('model-fire.pt')  # Assuming GPU acceleration
+weapon_model = YOLO('model-gun.pt')  # Assuming GPU acceleration
 
 classnames_fire = ['fire', 'nofire', 'smoke']
 classnames_weapon = ['Handgun', 'Knife', 'Missile', 'Rifle', 'Sword']
@@ -27,6 +31,10 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
+
+    frame_count += 1
+    if frame_count % skip_frames != 0:
+        continue  # Skip frames if not a multiple of skip_frames
 
     # Process frame with some optimizations (consider a balance between speed and accuracy)
     fire_results = fire_model(frame, stream=True)  # Assuming GPU acceleration

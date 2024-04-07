@@ -7,6 +7,10 @@ import pandas as pd
 import numpy as np
 from tracker import Tracker
 
+# Frame skipping parameters
+skip_frames = 5  # Process every 5th frame
+frame_count = 0
+
 # Initialize Pygame mixer
 pygame.mixer.init()
 
@@ -40,6 +44,10 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
+
+    frame_count += 1
+    if frame_count % skip_frames != 0:
+        continue  # Skip frames if not a multiple of skip_frames
 
     frame = cv2.resize(frame, (1000, 500))
 
