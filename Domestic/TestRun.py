@@ -11,9 +11,9 @@ from tracker import Tracker
 pygame.mixer.init()
 
 # Load YOLO models for fire, weapon, and human detection
-fire_model = YOLO('fi.pt')
-weapon_model = YOLO('gun.pt')
-human_model = YOLO('yolov8s.pt')
+fire_model = YOLO('C:/Users/Martin Joseph Juneie/Documents/cctvBack/Domestic/fi.pt')
+weapon_model = YOLO('C:/Users/Martin Joseph Juneie/Documents/cctvBack/Domestic/gun.pt')
+human_model = YOLO('C:/Users/Martin Joseph Juneie/Documents/cctvBack/Domestic/yolov8s.pt')
 
 # Define class names for fire, weapon, and human detection
 classnames_fire = ['fire', 'nofire', 'smoke']
@@ -21,7 +21,7 @@ classnames_weapon = ['Handgun', 'Knife', 'Missile', 'Rifle', 'Sword']
 classnames_human = ['person']
 
 # Load alarm sound
-pygame.mixer.music.load('alarm1.mp3')
+pygame.mixer.music.load('C:/Users/Martin Joseph Juneie/Documents/cctvBack/Domestic/alarm1.mp3')
 
 # Initialize alarm flags for fire, weapon, and human detection
 fire_alarm_flag = False
@@ -29,7 +29,7 @@ weapon_alarm_flag = False
 human_alarm_flag = False
 
 # Open video capture
-cap = cv2.VideoCapture('testfire.mp4')
+cap = cv2.VideoCapture('C:/Users/Martin Joseph Juneie/Documents/cctvBack/Domestic/testfire.mp4')
 
 # Create a tracker for human detection
 tracker = Tracker()
